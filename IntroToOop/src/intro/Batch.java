@@ -2,7 +2,7 @@ package intro;
 
 public class Batch {
 
-    String name;
+    protected String name;
     String instructorName;
 
 
@@ -13,4 +13,5 @@ public class Batch {
     void changeInstructor(String name) {
         instructorName = name;
     }
+
 }
