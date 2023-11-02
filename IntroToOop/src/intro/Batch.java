@@ -2,9 +2,17 @@ package intro;
 
 public class Batch {
 
-    protected String name;
+    public String name;
     String instructorName;
 
+    public Batch(Batch b) {
+        this.name = b.name;
+        this.instructorName = b.instructorName;
+    }
+
+    public Batch() {
+
+    }
 
     void addStudent() {
         System.out.println("adding a student to" + name);
