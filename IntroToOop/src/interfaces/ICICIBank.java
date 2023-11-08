@@ -1,6 +1,6 @@
 package interfaces;
 
-public class ICICIBank implements BankingService{
+public class ICICIBank implements BankingService, InvestmentService{
     @Override
     public double checkBalance(int accNo) {
         if (accNo == 0) {
@@ -13,5 +13,10 @@ public class ICICIBank implements BankingService{
     @Override
     public void pay(int fromAcc, int toAcc, double amount) {
         System.out.println("SUCCESS to ICICI");
+    }
+
+    @Override
+    public void invest() {
+
     }
 }

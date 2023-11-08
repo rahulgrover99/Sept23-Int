@@ -1,6 +1,14 @@
 package interfaces;
 
 public class PhonePe {
+
+    // Variable 'COUNTER' might not have been initialized
+    static final int COUNTER = 1;
+    static int counter = 1;
+    static double convertToDollars(int ruppees) {
+        return ruppees/87.0;
+    }
+
     private final BankingService bankingService;
     public PhonePe(BankingService bankingService) {
         this.bankingService = bankingService;
