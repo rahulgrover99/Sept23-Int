@@ -12,6 +12,6 @@ public class LinkedList implements Iterable<Integer>{
 
     @Override
     public Iterator<Integer> iterator() {
-        return new NodeIterator(head);
+        return new Node.NodeIterator(head);
     }
 }
