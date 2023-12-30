@@ -6,12 +6,10 @@ import adapter.thirdparty.YesBankApi;
 public class Main {
 
     public static void main(String[] args) {
-        YesBankAdapter yesBankAdapter = new YesBankAdapter();
-        IciciBankAdapter iciciBankAdapter = new IciciBankAdapter(new ICICIBankApi());
 
+        BankingService bankingService = SimpleAdaptorFactory.getAdapterInstance("ICICI");
 
-
-        PhonePe phonePe = new PhonePe(iciciBankAdapter);
+        PhonePe phonePe = new PhonePe(bankingService);
 
         phonePe.createBankAccount();
 
