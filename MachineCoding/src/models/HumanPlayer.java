@@ -1,5 +1,8 @@
 package models;
 
+import lombok.experimental.SuperBuilder;
+
+@SuperBuilder
 public class HumanPlayer extends Player {
     private int rank;
     private int age;
