@@ -3,6 +3,8 @@ import controllers.PlayerController;
 import models.DifficultyLevel;
 import models.Game;
 import models.Player;
+import strategies.winning.ColumnWinningStrategy;
+import strategies.winning.RowWinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +52,19 @@ public class Main {
             }
         }
 
-        Game game = GameController.initiateGame(dimension, players, List.of());
+        Game game = GameController.initiateGame(
+                dimension,
+                players,
+                List.of(new ColumnWinningStrategy(), new RowWinningStrategy()));
 
+        System.out.println("Are you ready to start the game?");
+
+        if (sc.next().equals("Y")) {
+            GameController gc = new GameController(game);
+            gc.startGame();
+        }
+
+        System.out.println("Game ended.");
 
 
 

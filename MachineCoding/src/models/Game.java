@@ -1,10 +1,14 @@
 package models;
 
+import lombok.Getter;
+import lombok.Setter;
 import strategies.winning.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class Game {
     public Board board;
     private List<Player> players;
