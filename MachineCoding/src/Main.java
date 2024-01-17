@@ -9,6 +9,7 @@ import strategies.winning.RowWinningStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -52,6 +53,20 @@ public class Main {
             }
         }
 
+//        System.out.println(players.stream().map(player -> player.getSymbol()).
+//                collect(Collectors.toSet()).size());
+//        System.out.println(players.size());
+//        if(players.stream().map(player -> player.getSymbol()).
+//                collect(Collectors.toSet()).size() != players.size()) {
+//            throw new RuntimeException();
+//        }
+
+
+        assert players.stream().map(player -> player.getSymbol()).
+                collect(Collectors.toSet()).size() == players.size();
+
+
+
         Game game = GameController.initiateGame(
                 dimension,
                 players,
@@ -65,6 +80,10 @@ public class Main {
         }
 
         System.out.println("Game ended.");
+
+        // TODO: Ask if the player wants a replay of the game.
+        // Using the list of moves that we have stored.
+
 
 
 

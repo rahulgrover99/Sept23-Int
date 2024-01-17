@@ -1,7 +1,11 @@
 package services;
 
+import exceptions.InvalidCellException;
 import models.*;
 import strategies.winning.WinningStrategy;
+
+import java.util.List;
+import java.util.Scanner;
 
 public class GameService {
 
@@ -24,8 +28,15 @@ public class GameService {
             Player currentPlayer = game.getPlayers().get(game.getNextPlayerIndex());
             System.out.printf("It's %s move...\n", currentPlayer.getName());
 
-            Cell cell = currentPlayer.nextMove(game.getBoard());
+            Cell cell = null;
+            try {
+                cell = currentPlayer.nextMove(game.getBoard());
+            } catch (InvalidCellException e) {
+                System.out.println("Please re-check the cell you entered!");
+                continue;
+            }
 
+            game.getMoves().add(new Move(cell, currentPlayer));
             game.getBoard().print();
 
             for (WinningStrategy winningStrategy: game.getWinningStrategies()) {
@@ -34,6 +45,10 @@ public class GameService {
                     System.out.printf("Player %s won!!!", currentPlayer.getName());
                     return;
                 }
+            }
+
+            if (currentPlayer.getPlayerType().equals(PlayerType.HUMAN)) {
+                askIfPlayerWantsToUndo();
             }
 
             this.game.setNextPlayerIndex(
@@ -46,6 +61,31 @@ public class GameService {
             game.setGameState(GameState.DRAW);
             System.out.println("No more cells to play, and hence game draw.");
         }
+    }
+
+    private void askIfPlayerWantsToUndo() {
+        System.out.println("Would you like to undo the last move?");
+        Scanner sc = new Scanner(System.in);
+        String response = sc.next();
+
+        if (response.equals("Y")) {
+            undoLastMove();
+            game.board.print();
+        }
+    }
+
+    private void undoLastMove() {
+        System.out.println("Removing the last move");
+        List<Move> moves = game.getMoves();
+        System.out.println(moves.get(moves.size() - 1));
+        Cell cell = moves.get(moves.size() - 1).getCell();
+
+        moves.remove(moves.size() - 1);
+        cell.setCellState(CellState.EMPTY);
+        cell.setPlayer(null);
+
+        game.setNextPlayerIndex(game.getNextPlayerIndex() - 1);
+
     }
 
     private boolean checkEmptySpace() {
