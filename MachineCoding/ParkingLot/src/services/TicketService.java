@@ -1,12 +1,12 @@
 package services;
 
 import exceptions.GateNotFoundException;
-import models.Gate;
-import models.Ticket;
-import models.Vehicle;
-import models.VehicleType;
+import models.*;
 import repositories.GateRepository;
+import repositories.TicketRepository;
 import repositories.VehicleRepository;
+import strategies.RandomSpotAssignmentStrategy;
+import strategies.SpotAssignmentStrategy;
 
 import java.time.Instant;
 import java.util.Date;
@@ -17,11 +17,16 @@ public class TicketService {
 
     private final GateRepository gateRepository;
     private final VehicleRepository vehicleRepository;
+    private final SpotAssignmentStrategy spotAssignmentStrategy;
 
-    public TicketService(GateRepository gateRepository, VehicleRepository vehicleRepository) {
+    public TicketService(GateRepository gateRepository, VehicleRepository vehicleRepository, SpotAssignmentStrategy spotAssignmentStrategy, TicketRepository ticketRepository) {
         this.gateRepository = gateRepository;
         this.vehicleRepository = vehicleRepository;
+        this.spotAssignmentStrategy = spotAssignmentStrategy;
+        this.ticketRepository = ticketRepository;
     }
+
+    private final TicketRepository ticketRepository;
 
     public Ticket issueTicket(String vehicleNumber, VehicleType vehicleType, Long gateId) throws GateNotFoundException {
 
@@ -61,6 +66,22 @@ public class TicketService {
 //        ticket.setParkingSpot();
 
 
+        ParkingSpot parkingSpot = spotAssignmentStrategy.getSpot(1L, gate, vehicleType);
+
+        parkingSpot.setVehicle(savedVehicle);
+        parkingSpot.setParkingSpotStatus(ParkingSpotStatus.OCCUPIED);
+
+        // Parking spot repository and save this
+
+        ticket.setParkingSpot(parkingSpot);
+
+
+        ticketRepository.save(ticket);
+
+
+        return ticket;
+
+
         // Save the ticket object and vehicle number in the DB. -> Repository.
 
 
@@ -68,7 +89,6 @@ public class TicketService {
         // 2. Select a spot for the vehicle.
         // 3. Return the object;
 
-        return null;
     }
 
 }

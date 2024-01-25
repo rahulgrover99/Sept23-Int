@@ -24,7 +24,7 @@ public class TicketController {
                     request.getVehicleType(),
                     request.getGateId());
         } catch (GateNotFoundException e) {
-            throw new RuntimeException("INVALID GATE");
+            return IssueTicketResponse.builder().statusCode(400).message("BAD REQUEST").build();
         }
 
         return IssueTicketResponse.builder()

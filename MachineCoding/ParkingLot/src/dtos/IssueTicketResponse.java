@@ -16,4 +16,6 @@ public class IssueTicketResponse {
     private Date entryTime;
     private int gateNumber;
     private String vehicleNumber;
+    private int statusCode;
+    private String message;
 }
