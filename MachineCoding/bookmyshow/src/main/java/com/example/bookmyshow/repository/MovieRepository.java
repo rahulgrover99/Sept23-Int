@@ -13,5 +13,5 @@ public interface MovieRepository extends
 
     Optional<Movie> findMovieByName(String name);
     Optional<Movie> findMovieByNameAndCategory(String name, String category);
-    
+
 }

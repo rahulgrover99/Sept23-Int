@@ -22,7 +22,6 @@ public class TicketController {
         System.out.println("Request hits the server");
         movieRepository.save(
                 Movie.builder()
-                        .id(1L)
                         .name("Kal ho na ho")
                         .category("drama")
                         .build());

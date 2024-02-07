@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Movie {
-    @Id
-    private Long id;
+public class Movie extends BaseModel{
+
     private String name;
     private String language;
     @Column(nullable = true)
@@ -24,7 +23,7 @@ public class Movie {
     @Override
     public String toString() {
         return "Movie{" +
-                "id=" + id +
+                "id=" + this.getId() +
                 ", name='" + name + '\'' +
                 ", language='" + language + '\'' +
                 ", rating=" + rating +
