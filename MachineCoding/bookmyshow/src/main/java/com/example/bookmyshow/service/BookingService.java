@@ -44,20 +44,23 @@ public class BookingService {
 
         List<ShowSeat> showSeats = showSeatRepository.findAllById(showSeatIds);
 
+        // The number of showseats selected by the user and sent to us.
+        // The number of corresponding seats we got from DB.
         if (showSeats.size() != showSeatIds.size()) {
             throw new BadRequestException();
         }
-
 
         for (ShowSeat showSeat: showSeats) {
             if (!showSeat.getShowSeatStatus().equals(ShowSeatStatus.AVAILABLE)) {
                 throw new BadRequestException("Seat not available.");
             }
 
-
+            // Only updates the status of java object not the database row.
             showSeat.setShowSeatStatus(ShowSeatStatus.BLOCKED);
 
         }
+
+        // Save the updated status to the DB.
         showSeatRepository.saveAll(showSeats);
 
         Show show = showSeats.get(0).getShow();
