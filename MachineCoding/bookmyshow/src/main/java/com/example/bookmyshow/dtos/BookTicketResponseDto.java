@@ -12,6 +12,6 @@ import java.util.List;
 public class BookTicketResponseDto {
     private Long bookingId;
     private double amount;
-    private List<Integer> seatNumbers;
+    private List<Long> seatNumbers;
     private String theatreName;
 }
