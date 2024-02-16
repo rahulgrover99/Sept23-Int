@@ -1,11 +1,17 @@
 package com.example.splitwise.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Expense extends BaseModel {
     private String name;
     @Enumerated(EnumType.STRING)

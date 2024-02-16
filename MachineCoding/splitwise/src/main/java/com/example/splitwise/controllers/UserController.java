@@ -20,4 +20,7 @@ public class UserController {
         return userRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
+    // TODO: Add a post mapping for creating user.
+    // Implement DTO'S if you like.
+
 }
