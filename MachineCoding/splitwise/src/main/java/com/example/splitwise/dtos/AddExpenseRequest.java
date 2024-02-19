@@ -13,4 +13,5 @@ public class AddExpenseRequest {
     private Double totalAmount;
     private Map<Long, Double> paidBy;
     private Map<Long, Double> owedBy;
+    private String groupName;
 }

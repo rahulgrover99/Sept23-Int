@@ -55,6 +55,7 @@ public class ExpenseService {
 
 
         Expense expense = Expense.builder().name(request.getName())
+                .group(groupRepository.findByName(request.getGroupName()).get())
                 .type(request.getExpenseType()).paidBy(paidByExpenseUsers)
                 .owedBy(owedByExpenseUsers).totalAmount(request.getTotalAmount()).build();
 
